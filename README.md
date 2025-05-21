@@ -28,7 +28,7 @@ COPY spring-petclinic.jar .
 # ENTRYPOINT пустой — приложение запускается вручную
 ```
 
-**Собирание образ:**
+**Сборка образа:**
 ```bash
 docker build -t petclinic-crac .
 ```
