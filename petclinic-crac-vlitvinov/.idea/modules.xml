@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/petclinic-crac-vlitvinov.iml" filepath="$PROJECT_DIR$/.idea/petclinic-crac-vlitvinov.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-petclinic/spring-petclinic.iml" filepath="$PROJECT_DIR$/spring-petclinic/spring-petclinic.iml" />
     </modules>
   </component>
 </project>
