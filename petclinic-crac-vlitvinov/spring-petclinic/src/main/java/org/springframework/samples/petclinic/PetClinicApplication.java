@@ -34,7 +34,22 @@ import org.crac.Resource;
 @ImportRuntimeHints(PetClinicRuntimeHints.class)
 public class PetClinicApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
+		boolean makeEarlyCheckpoint = Boolean.parseBoolean(System.getenv("MAKE_EARLY_CHECKPOINT"));
+		if (makeEarlyCheckpoint) {
+			try {
+				Core.checkpointRestore();
+				// Если дошли сюда — чекпоинт НЕ поддерживается, завершаем:
+				System.exit(0);
+			}
+			catch (org.crac.RestoreException re) {
+				// Это restore! Просто продолжаем выполнение (идем дальше)
+			}
+			catch (Exception ex) {
+				ex.printStackTrace();
+				System.exit(1);
+			}
+		}
 		SpringApplication.run(PetClinicApplication.class, args);
 	}
 

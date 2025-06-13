@@ -10,12 +10,14 @@ RUN wget https://cdn.azul.com/zulu/bin/zulu21.42.21-ca-crac-jdk21.0.7-linux_x64.
     rm zulu21.42.21-ca-crac-jdk21.0.7-linux_x64.tar.gz
 
 COPY target/spring-petclinic-3.4.0-SNAPSHOT.jar /app/spring-petclinic.jar
+COPY postgresql-*.jar /app/
+COPY docker-entrypoint.sh /app/docker-entrypoint.sh
 
 WORKDIR /app
 
 ENV JAVA_HOME=/opt/crac-jdk
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
-COPY postgresql-*.jar /app/
+RUN chmod +x /app/docker-entrypoint.sh
 
-CMD ["java", "-XX:CRaCCheckpointTo=cr", "-cp", "spring-petclinic.jar:postgresql-*.jar", "org.springframework.samples.petclinic.PetClinicApplication"]
+ENTRYPOINT ["/app/docker-entrypoint.sh"]

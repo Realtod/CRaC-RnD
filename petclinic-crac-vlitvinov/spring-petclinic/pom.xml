@@ -16,20 +16,15 @@
   <name>petclinic</name>
 
   <properties>
-
     <!-- Generic properties -->
     <java.version>21</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <!-- Important for reproducible builds. Update using e.g. ./mvnw versions:set
-        -DnewVersion=... -->
     <project.build.outputTimestamp>2024-11-28T14:37:52Z</project.build.outputTimestamp>
-
     <!-- Web dependencies -->
     <webjars-locator.version>1.0.1</webjars-locator.version>
     <webjars-bootstrap.version>5.3.3</webjars-bootstrap.version>
     <webjars-font-awesome.version>4.7.0</webjars-font-awesome.version>
-
     <checkstyle.version>10.20.1</checkstyle.version>
     <jacoco.version>0.8.12</jacoco.version>
     <libsass.version>0.2.29</libsass.version>
@@ -39,7 +34,6 @@
     <spring-format.version>0.0.43</spring-format.version>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
-
   </properties>
 
   <dependencies>
@@ -83,7 +77,6 @@
       <groupId>io.projectreactor</groupId>
       <artifactId>reactor-core</artifactId>
     </dependency>
-
     <!-- Databases - Uses H2 by default -->
     <dependency>
       <groupId>com.h2database</groupId>
@@ -100,7 +93,6 @@
       <artifactId>postgresql</artifactId>
       <scope>runtime</scope>
     </dependency>
-
     <!-- Caching -->
     <dependency>
       <groupId>javax.cache</groupId>
@@ -110,7 +102,6 @@
       <groupId>com.github.ben-manes.caffeine</groupId>
       <artifactId>caffeine</artifactId>
     </dependency>
-
     <!-- Webjars -->
     <dependency>
       <groupId>org.webjars</groupId>
@@ -127,7 +118,6 @@
       <artifactId>font-awesome</artifactId>
       <version>${webjars-font-awesome.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
@@ -153,12 +143,10 @@
       <artifactId>mysql</artifactId>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>jakarta.xml.bind</groupId>
       <artifactId>jakarta.xml.bind-api</artifactId>
     </dependency>
-
   </dependencies>
 
   <build>
@@ -175,9 +163,7 @@
             <configuration>
               <rules>
                 <requireJavaVersion>
-                  <message>This build requires at least Java ${java.version},
-                                        update your JVM, and
-                                        run the build again</message>
+                  <message>This build requires at least Java ${java.version}, update your JVM, and run the build again</message>
                   <version>${java.version}</version>
                 </requireJavaVersion>
               </rules>
@@ -225,7 +211,15 @@
               <configLocation>src/checkstyle/nohttp-checkstyle.xml</configLocation>
               <sourceDirectories>${basedir}</sourceDirectories>
               <includes>**/*</includes>
-              <excludes>**/.git/**/*,**/.idea/**/*,**/target/**/,**/.flattened-pom.xml,**/*.class</excludes>
+              <excludes>
+                **/.git/**/*
+                ,**/.idea/**/*
+                ,**/target/**/
+                ,**/.flattened-pom.xml
+                ,**/*.class
+                ,**/cr/**
+                ,**/*.img
+              </excludes>
               <propertyExpansion>config_loc=${basedir}/src/checkstyle/</propertyExpansion>
             </configuration>
           </execution>
@@ -240,8 +234,6 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
         <executions>
           <execution>
-            <!-- Spring Boot Actuator displays build-related information
-              if a META-INF/build-info.properties file is present -->
             <goals>
               <goal>build-info</goal>
             </goals>
@@ -275,9 +267,6 @@
           </execution>
         </executions>
       </plugin>
-
-      <!-- Spring Boot Actuator displays build-related information if a git.properties file is
-      present at the classpath -->
       <plugin>
         <groupId>io.github.git-commit-id</groupId>
         <artifactId>git-commit-id-maven-plugin</artifactId>
@@ -286,14 +275,11 @@
           <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
         </configuration>
       </plugin>
-      <!-- Spring Boot Actuator displays sbom-related information if a CycloneDX SBOM file is
-      present at the classpath -->
       <plugin>
         <?m2e ignore?>
         <groupId>org.cyclonedx</groupId>
         <artifactId>cyclonedx-maven-plugin</artifactId>
       </plugin>
-
     </plugins>
   </build>
   <licenses>
@@ -302,8 +288,12 @@
       <url>https://www.apache.org/licenses/LICENSE-2.0</url>
     </license>
   </licenses>
-
   <repositories>
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone</url>
+    </repository>
     <repository>
       <snapshots>
         <enabled>true</enabled>
@@ -311,14 +301,6 @@
       <id>spring-snapshots</id>
       <name>Spring Snapshots</name>
       <url>https://repo.spring.io/snapshot</url>
-    </repository>
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>spring-milestones</id>
-      <name>Spring Milestones</name>
-      <url>https://repo.spring.io/milestone</url>
     </repository>
   </repositories>
   <pluginRepositories>
@@ -339,7 +321,6 @@
       <url>https://repo.spring.io/milestone</url>
     </pluginRepository>
   </pluginRepositories>
-
   <profiles>
     <profile>
       <id>css</id>
@@ -369,7 +350,6 @@
               </execution>
             </executions>
           </plugin>
-
           <plugin>
             <groupId>com.gitlab.haynes</groupId>
             <artifactId>libsass-maven-plugin</artifactId>
@@ -402,8 +382,6 @@
       <build>
         <pluginManagement>
           <plugins>
-            <!-- This plugin's configuration is used to store Eclipse m2e settings
-              only. It has no influence on the Maven build itself. -->
             <plugin>
               <groupId>org.eclipse.m2e</groupId>
               <artifactId>lifecycle-mapping</artifactId>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="10.20.1">
+<file name="/Users/realtod/IdeaProjects/CentralUniversity/CRaC-RnD/petclinic-crac-vlitvinov/spring-petclinic/checkpoint_instruction.md">
+</file>
 <file name="/Users/realtod/IdeaProjects/CentralUniversity/CRaC-RnD/petclinic-crac-vlitvinov/spring-petclinic/.DS_Store">
 </file>
 <file name="/Users/realtod/IdeaProjects/CentralUniversity/CRaC-RnD/petclinic-crac-vlitvinov/spring-petclinic/mvnw.cmd">
@@ -11,6 +13,8 @@
 <file name="/Users/realtod/IdeaProjects/CentralUniversity/CRaC-RnD/petclinic-crac-vlitvinov/spring-petclinic/k8s/petclinic.yml">
 </file>
 <file name="/Users/realtod/IdeaProjects/CentralUniversity/CRaC-RnD/petclinic-crac-vlitvinov/spring-petclinic/pom.xml">
+</file>
+<file name="/Users/realtod/IdeaProjects/CentralUniversity/CRaC-RnD/petclinic-crac-vlitvinov/spring-petclinic/spring-petclinic.iml">
 </file>
 <file name="/Users/realtod/IdeaProjects/CentralUniversity/CRaC-RnD/petclinic-crac-vlitvinov/spring-petclinic/.devcontainer/Dockerfile">
 </file>
@@ -25,6 +29,8 @@
 <file name="/Users/realtod/IdeaProjects/CentralUniversity/CRaC-RnD/petclinic-crac-vlitvinov/spring-petclinic/gradle/wrapper/gradle-wrapper.properties">
 </file>
 <file name="/Users/realtod/IdeaProjects/CentralUniversity/CRaC-RnD/petclinic-crac-vlitvinov/spring-petclinic/gradlew">
+</file>
+<file name="/Users/realtod/IdeaProjects/CentralUniversity/CRaC-RnD/petclinic-crac-vlitvinov/spring-petclinic/docker-entrypoint.sh">
 </file>
 <file name="/Users/realtod/IdeaProjects/CentralUniversity/CRaC-RnD/petclinic-crac-vlitvinov/spring-petclinic/.gitignore">
 </file>
