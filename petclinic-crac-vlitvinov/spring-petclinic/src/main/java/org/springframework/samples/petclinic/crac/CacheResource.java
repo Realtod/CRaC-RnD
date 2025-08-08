@@ -27,13 +27,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * CRaC {@link Resource} that clears Spring caches after restore.
+ * CRaC {@link Resource} that logs Spring cache sizes during checkpoint and
+ * restore.
  *
  * <p>The cache contents are included in the checkpoint image. When the
- * application is restored, entries might be stale. To avoid serving outdated
- * data we invalidate all caches after restore.</p>
- *
- * @author AI
+ * application is restored, entries remain so that warm caches can be observed
+ * immediately after restore. In a real deployment caches might need manual
+ * invalidation to avoid stale data.</p>
  */
 @Component
 public class CacheResource implements Resource {
@@ -53,16 +53,7 @@ public class CacheResource implements Resource {
 
     @Override
     public void afterRestore(Context<? extends Resource> context) {
-        logCaches("after restore before clear");
-        Collection<String> cacheNames = cacheManager.getCacheNames();
-        for (String name : cacheNames) {
-            Cache cache = cacheManager.getCache(name);
-            if (cache != null) {
-                cache.clear();
-                logger.info("cleared cache '{}'", name);
-            }
-        }
-        logCaches("after restore after clear");
+        logCaches("after restore");
     }
 
     private void logCaches(String phase) {
