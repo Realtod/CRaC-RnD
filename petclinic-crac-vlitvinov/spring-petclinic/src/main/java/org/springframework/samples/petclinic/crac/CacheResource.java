@@ -16,12 +16,15 @@
 package org.springframework.samples.petclinic.crac;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.crac.Context;
 import org.crac.Resource;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * CRaC {@link Resource} that clears Spring caches after restore.
@@ -35,6 +38,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class CacheResource implements Resource {
 
+    private static final Logger logger = LoggerFactory.getLogger(CacheResource.class);
+
     private final CacheManager cacheManager;
 
     public CacheResource(CacheManager cacheManager) {
@@ -43,17 +48,34 @@ public class CacheResource implements Resource {
 
     @Override
     public void beforeCheckpoint(Context<? extends Resource> context) {
-        // Nothing to do; cache state will be stored in the checkpoint.
+        logCaches("before checkpoint");
     }
 
     @Override
     public void afterRestore(Context<? extends Resource> context) {
+        logCaches("after restore before clear");
         Collection<String> cacheNames = cacheManager.getCacheNames();
         for (String name : cacheNames) {
             Cache cache = cacheManager.getCache(name);
             if (cache != null) {
                 cache.clear();
+                logger.info("cleared cache '{}'", name);
             }
+        }
+        logCaches("after restore after clear");
+    }
+
+    private void logCaches(String phase) {
+        Collection<String> cacheNames = cacheManager.getCacheNames();
+        for (String name : cacheNames) {
+            Cache cache = cacheManager.getCache(name);
+            Object nativeCache = cache != null ? cache.getNativeCache() : null;
+            int size = -1;
+            if (nativeCache instanceof Map<?, ?>) {
+                size = ((Map<?, ?>) nativeCache).size();
+            }
+            logger.info("{} - cache '{}' size {}", phase, name,
+                    (size >= 0 ? size : "unknown"));
         }
     }
 }
